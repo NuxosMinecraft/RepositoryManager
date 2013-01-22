@@ -48,7 +48,7 @@ $j = 1;
             <div class="modal hide" id="myModal<?php echo $nomPlugIn; ?>">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">x</button>
-                    <h3>Voulez-vous vraiment supprimez ...?</h3>
+                    <h3>Voulez-vous vraiment supprimer ...?</h3>
                 </div>
                 <div class="modal-body">
                     <p>Le plug-in <?php echo $nomPlugIn; ?></p>
