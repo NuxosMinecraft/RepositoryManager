@@ -3,15 +3,23 @@ $i = 1;
 $j = 1;
 ?>
 
+<?php if ($this->messageFlash): ?>
+    <div class="alert alert-success">
+        <button class="close" data-dismiss="alert" type="button">x</button>
+        <?php echo $this->messageFlash; ?>
+    </div>
+    <?php $this->messageFlash = NULL; ?>
+<?php endif; ?>
+
 <div class="well">
     <?php echo $this->version; ?>
 </div>
 
 <ul class="nav nav-list">
-    <?php foreach ($this->categories as $categories => $listPlugIn): ?>
-        <li class="nav-header"><?php echo $categories; ?></li>
+    <?php foreach ($this->categories as $categorie => $listPlugInByCategorie): ?>
+        <li class="nav-header"><?php echo $categorie; ?></li>
         
-        <?php foreach ($listPlugIn as $nomPlugIn => $contenuPlugIn): ?>
+        <?php foreach ($listPlugInByCategorie as $nomPlugIn => $contenuPlugIn): ?>
             <div class="accordion" id="accordion<?php echo $i; ?>">
                 <div class="accordion-group">
                     <li>
@@ -30,7 +38,7 @@ $j = 1;
                                         </tr>
                                     <?php endforeach; ?>
                                 </table>
-                                <a class="btn btn-primary" href="#">Modifier</a>
+                                <a class="btn btn-primary" href="plug-in.php?modif=<?php echo $nomPlugIn; ?>">Modifier</a>
                                 <a class="btn btn-danger" data-toggle="modal" href="#myModal<?php echo $nomPlugIn; ?>">Supprimer</a>
                             </div>
                         </div>
@@ -46,8 +54,8 @@ $j = 1;
                     <p>Le plug-in <?php echo $nomPlugIn; ?></p>
                 </div>
                 <div class="modal-footer">
-                    <a href="#" class="btn" data-dismiss="modal">Non, je clique partout comme un noob sans savoir ce que ça fait :/</a>
-                    <a href="#" class="btn btn-primary">Oui, je clique like a boss !</a>
+                    <a href="#" class="btn" data-dismiss="modal">Non</a>
+                    <a href="#" class="btn btn-primary">Oui</a>
                 </div>
             </div>
             <?php $j = $j + 1; ?>
