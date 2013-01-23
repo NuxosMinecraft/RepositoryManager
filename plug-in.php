@@ -14,9 +14,15 @@ if (isset($_POST['plugin']))
 }
 // Traitement du formulaire de modif
 elseif (isset($_POST['modif']))
-{
     $controller->modif();
+// Traitement d'une demande de suppression
+elseif (isset($_GET['suppr']))
+{
+    $id = htmlspecialchars($_GET['suppr']);
+    
+    $controller->suppr($id);
 }
+    
 /*
  * DEMANDE DE VUE
  */

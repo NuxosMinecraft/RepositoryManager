@@ -67,7 +67,7 @@ class PlugInC
         $nomPlugIn = array_pop($_POST);
         
         foreach ($_POST as $key => $valeur)
-            $this->plugIn[$nomPlugIn][$key] = $valeur;
+            $this->plugIn[$nomPlugIn][$key] = htmlspecialchars($valeur);
         
         //$this->plugIn[$nomPlugIn]['source'] = '"'.$this->plugIn[$nomPlugIn]['source'].'"';
         
@@ -78,6 +78,14 @@ class PlugInC
         $this->vueIndex();
     }
 
+    public function suppr($id)
+    {
+        $this->modele->deletePlugIn($id);
+        
+        $this->messageFlash = 'Suppression du plug-in '.$id.' faite !';
+        
+        $this->vueIndex();
+    }
 
     /*
      * DIVERS

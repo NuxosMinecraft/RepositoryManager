@@ -55,7 +55,7 @@ $j = 1;
                 </div>
                 <div class="modal-footer">
                     <a href="#" class="btn" data-dismiss="modal">Non</a>
-                    <a href="#" class="btn btn-primary">Oui</a>
+                    <a href="plug-in.php?suppr=<?php echo $nomPlugIn; ?>" class="btn btn-primary">Oui</a>
                 </div>
             </div>
             <?php $j = $j + 1; ?>

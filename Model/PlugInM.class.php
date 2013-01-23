@@ -89,19 +89,23 @@ class PlugInM
         return $repository;            
     }
     
-    public function getCategoriesByPlugIn($plugInArg)
+    public function getCategorieByNamePlugin($namePlugInArg)
     {
         $repository = $this->getCategories();
-        $nomPlugInArg = $this->getNomPlugIn($plugInArg);
         
         foreach ($repository as $categorie => $listPlugInByCategorie)
         {
             foreach ($listPlugInByCategorie as $nomPlugIn => $contenuPlugIn)
             {
-                if ($nomPlugIn == $nomPlugInArg)
+                if ($nomPlugIn == $namePlugInArg)
                     return $categorie;                    
             }
         }
+    }
+
+    public function getCategorieByPlugIn($plugIn)
+    {
+        return $this->getCategorieByNamePlugin($this->getNomPlugIn($plugIn));
     }
 
     public function getPlugIn($id)
@@ -149,18 +153,23 @@ class PlugInM
 
     public function setPlugIn($plugIn)
     {
-        $categorie = $this->getCategoriesByPlugIn($plugIn);
+        $categorie = $this->getCategorieByPlugIn($plugIn);
         $nomPlugIn = $this->getNomPlugIn($plugIn);
         
         $this->repo['repository'][$categorie][$nomPlugIn] = $plugIn[$nomPlugIn];
         
         $this->save();
-        
-//        echo '<pre>';
-//        print_r($this->repo);
-//        echo '</pre>';
     }
     
+    public function deletePlugIn($nomPlugIn)
+    {
+        $categorie = $this->getCategorieByNamePlugin($nomPlugIn);
+        
+        unset($this->repo['repository'][$categorie][$nomPlugIn]);
+        
+        $this->save();
+    }
+
     public function save()
     {
         $this->setVersion();
