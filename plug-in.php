@@ -8,9 +8,9 @@ $controller = new PlugInC();
  * TRAITEMENT
  */
 
-if (isset($_POST['plugin']))
+if (isset($_POST['add']))
 {
-    
+    $controller->add();
 }
 // Traitement du formulaire de modif
 elseif (isset($_POST['modif']))
@@ -27,6 +27,11 @@ elseif (isset($_GET['suppr']))
  * DEMANDE DE VUE
  */
 
+// Add
+elseif (isset ($_GET['add']))
+{
+    $controller->vueAjout();
+}
 // Modif
 elseif (isset($_GET['modif']))
 {

@@ -161,6 +161,15 @@ class PlugInM
         $this->save();
     }
     
+    public function addPlugIn($plugIn, $categorie)
+    {
+        $nomPlugIn = $this->getNomPlugIn($plugIn);
+        
+        $this->repo['repository'][$categorie][$nomPlugIn] = $plugIn[$nomPlugIn];
+        
+        $this->save();
+    }
+
     public function deletePlugIn($nomPlugIn)
     {
         $categorie = $this->getCategorieByNamePlugin($nomPlugIn);
@@ -175,5 +184,7 @@ class PlugInM
         $this->setVersion();
         
         file_put_contents($this->fileRepository, yaml_emit($this->repo, YAML_UTF8_ENCODING));
+        
+        //var_dump(yaml_emit_file($this->fileRepository, $this->repo, YAML_UTF8_ENCODING));
     }
 }

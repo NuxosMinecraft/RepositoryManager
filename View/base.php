@@ -18,6 +18,9 @@ else
 	<div class="navbar">
             <div class="navbar-inner">
 		<a class="brand" href="index.php">RepositoryManager</a>
+                <ul class="nav">
+                    <li><a href="plug-in.php?add=1">Ajouter un plug-in</a></li>
+                </ul>
             </div>
         </div>
         <div class="container-fluid">

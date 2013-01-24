@@ -21,11 +21,13 @@ class PlugInC
     private $jour;
     private $nbModif;
     private $modes;
+    private $cesure;
 
 
     public function __construct()
     {
     	$this->modele = new PlugInM();
+        $this->cesure = array('\r\n', '\n\r', '\n', '\r');
     }
     
     /*
@@ -57,17 +59,46 @@ class PlugInC
         include_once 'View/base.php';
     }
 
-
+    public function vueAjout()
+    {
+        $this->modes      = $this->modele->getModes();
+        $this->categories = $this->modele->getCategories();
+        
+        $title = 'Ajout d\'un plug-in';
+        $corps = 'View/addV.php';
+        
+        include_once 'View/base.php';
+    }
+    
+    
     /*
      * LES ACTIONS
      */
     
+    public function add()
+    {
+        array_pop($_POST);
+        $categorie = array_pop($_POST);
+        $nomPlugIn = array_shift($_POST);
+        
+        foreach ($_POST as $key => $valeur)
+            $this->plugIn[$nomPlugIn][$key] = htmlspecialchars($valeur);
+        
+        $this->modele->addPlugIn($this->plugIn, $categorie);
+        
+        $this->messageFlash = 'Ajout du plug-in '.$nomPlugIn.' effectué !';
+        
+        $this->vueIndex();
+    }
+
     public function modif()
     {
         $nomPlugIn = array_pop($_POST);
         
         foreach ($_POST as $key => $valeur)
             $this->plugIn[$nomPlugIn][$key] = htmlspecialchars($valeur);
+        
+        //$this->plugIn[$nomPlugIn]['description'] = str_replace($this->cesure, '', $this->plugIn[$nomPlugIn]['description']);
         
         //$this->plugIn[$nomPlugIn]['source'] = '"'.$this->plugIn[$nomPlugIn]['source'].'"';
         
